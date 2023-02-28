@@ -16,44 +16,63 @@
 // How do we find min temp?
 // Subtract min from max and return it?
 
-const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
+// const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
 
-const calculateTempAmplitude = function (temps) {
-  const temperatures = temps;
-  // Test number
-  let maxNumber = 0;
-  let minNumber = 0;
-  for (let i = 0; i < temperatures.length; i++) {
-    if (typeof temperatures[i] !== 'number') continue;
-    if (minNumber > temperatures[i]) {
-      minNumber = temperatures[i];
-    }
-    if (maxNumber < temperatures[i]) {
-      maxNumber = temperatures[i];
-    }
-  }
+// const calculateTempAmplitude = function (temps) {
+//   const temperatures = temps;
+//   // Test number
+//   let maxNumber = 0;
+//   let minNumber = 0;
+//   for (let i = 0; i < temperatures.length; i++) {
+//     if (typeof temperatures[i] !== 'number') continue;
+//     if (minNumber > temperatures[i]) {
+//       minNumber = temperatures[i];
+//     }
+//     if (maxNumber < temperatures[i]) {
+//       maxNumber = temperatures[i];
+//     }
+//   }
 
-  return `The temperature amplitude is ${minNumber - maxNumber}`;
+//   return `The temperature amplitude is ${minNumber - maxNumber}`;
+// };
+
+// console.log(calculateTempAmplitude(temperatures));
+
+// const calculateTempNewAmplitude = function (temps1, temps2) {
+//   const temperatures = temps1.concat(temps2);
+//   // Test number
+//   let maxNumber = 0;
+//   let minNumber = 0;
+//   for (let i = 0; i < temperatures.length; i++) {
+//     if (typeof temperatures[i] !== 'number') continue;
+//     if (minNumber > temperatures[i]) {
+//       minNumber = temperatures[i];
+//     }
+//     if (maxNumber < temperatures[i]) {
+//       maxNumber = temperatures[i];
+//     }
+//   }
+
+//   return `The temperature amplitude is ${minNumber - maxNumber}`;
+// };
+
+// console.log(calculateTempNewAmplitude(temperatures, [45, 8000]));
+
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+    // A: Fix
+    value: prompt('Degrees Celsius'),
+  };
+  // B: Find
+  console.log(measurement);
+  //   console.log(measurement.value);
+  //   console.warn(measurement.value);
+  //   console.error(measurement.value);
+
+  const kelvin = measurement.value + 273;
+  return kelvin;
 };
 
-console.log(calculateTempAmplitude(temperatures));
-
-const calculateTempNewAmplitude = function (temps1, temps2) {
-  const temperatures = temps1.concat(temps2);
-  // Test number
-  let maxNumber = 0;
-  let minNumber = 0;
-  for (let i = 0; i < temperatures.length; i++) {
-    if (typeof temperatures[i] !== 'number') continue;
-    if (minNumber > temperatures[i]) {
-      minNumber = temperatures[i];
-    }
-    if (maxNumber < temperatures[i]) {
-      maxNumber = temperatures[i];
-    }
-  }
-
-  return `The temperature amplitude is ${minNumber - maxNumber}`;
-};
-
-console.log(calculateTempNewAmplitude(temperatures, [45, 8000]));
+console.log(measureKelvin());
