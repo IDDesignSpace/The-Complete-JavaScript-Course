@@ -19,7 +19,7 @@ const newGameButton = document.querySelector('.again');
 const score = document.querySelector('.score');
 const highScoreText = document.querySelector('.highscore');
 
-//
+// Resets the game
 const resetGame = function () {
   numberOfAttempts = 0;
   currentScore = 10;
