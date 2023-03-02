@@ -8,7 +8,7 @@
 // document.querySelector('.guess').value = 200008;
 
 let newSecretNumber;
-let numberOfAttempts = 1;
+let numberOfAttempts;
 let highScoreNumber = 0;
 let currentScore = 10;
 const checkGuessButton = document.querySelector('.check');
@@ -21,7 +21,7 @@ const highScoreText = document.querySelector('.highscore');
 
 //
 const resetGame = function () {
-  numberOfAttempts = 1;
+  numberOfAttempts = 0;
   currentScore = 10;
   newSecretNumber = Math.trunc(Math.random() * 10) + 1;
   checkGuessButton.addEventListener('click', checkGuess);
@@ -41,6 +41,7 @@ const checkGuess = function () {
   if (!input) {
     message.textContent = 'Type a number';
   } else if (input === newSecretNumber) {
+    // Win the game
     numberOfAttempts++;
     currentScore--;
     number.textContent = input;
@@ -48,36 +49,32 @@ const checkGuess = function () {
     message.textContent = 'You did it 🔥';
     document.body.style.backgroundColor = 'green';
     number.style.width = '50%';
-    // This sets the highscore
+    // This sets the highscore for the game. The logic first checks that the game has been played at least once to
+    // to generate a new highscore. If a game hasn't been played then the highscore is set. If the player has not beaten the previous high score then the game is over.
     if (highScoreNumber != 0 && numberOfAttempts < highScoreNumber) {
       highScoreNumber = numberOfAttempts;
-      highScoreText.textContent = numberOfAttempts - 1;
-    } else {
+      highScoreText.textContent = numberOfAttempts;
+      checkGuessButton.removeEventListener('click', checkGuess);
+    } else if (highScoreNumber === 0) {
       highScoreNumber = numberOfAttempts;
-      highScoreText.textContent = numberOfAttempts - 1;
+      highScoreText.textContent = numberOfAttempts;
+      checkGuessButton.removeEventListener('click', checkGuess);
+    } else {
       checkGuessButton.removeEventListener('click', checkGuess);
     }
   } else if (
-    input > newSecretNumber &&
-    numberOfAttempts != 10 &&
+    input != newSecretNumber &&
+    numberOfAttempts != 9 &&
     currentScore != 0
   ) {
-    message.textContent = 'Lower';
+    // Incorrect guess and you still have more guesses
+    message.textContent = input > newSecretNumber ? 'Lower' : 'Higher';
     numberOfAttempts++;
     currentScore--;
     score.textContent = currentScore;
     console.log(numberOfAttempts);
-  } else if (
-    input < newSecretNumber &&
-    numberOfAttempts != 10 &&
-    currentScore != 0
-  ) {
-    message.textContent = 'Higher';
-    numberOfAttempts++;
-    currentScore--;
-    console.log(numberOfAttempts);
-    score.textContent = currentScore;
   } else {
+    // No more guesses left - GAME OVER
     score.textContent = 0;
     message.textContent = 'Game Over Friend';
     checkGuessButton.removeEventListener('click', checkGuess);
