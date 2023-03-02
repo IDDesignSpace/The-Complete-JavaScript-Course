@@ -42,7 +42,9 @@ const checkGuess = function () {
     message.textContent = 'Type a number';
   } else if (input === newSecretNumber) {
     numberOfAttempts++;
+    currentScore--;
     number.textContent = input;
+    score.textContent = currentScore;
     message.textContent = 'You did it 🔥';
     document.body.style.backgroundColor = 'green';
     number.style.width = '50%';
